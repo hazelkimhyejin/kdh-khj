@@ -204,7 +204,6 @@
   </div>
   <div class="glitter-divider"></div>
 
-  <!-- love letter card -->
   <div style="background:linear-gradient(135deg,var(--p7),var(--p6));border-radius:20px;padding:2rem;margin-bottom:1.5rem;position:relative;overflow:hidden;">
     <div style="position:absolute;top:-20px;right:-20px;width:120px;height:120px;border-radius:50%;background:rgba(226,201,110,0.1);"></div>
     <div style="position:absolute;bottom:-30px;left:-30px;width:150px;height:150px;border-radius:50%;background:rgba(139,92,246,0.15);"></div>
@@ -250,7 +249,6 @@
   </div>
 
   <div class="glitter-divider"></div>
-  <!-- closing note -->
   <div style="background:var(--p1);border-radius:16px;padding:1.5rem;border:1px solid var(--border);text-align:center;">
     <p style="font-size:13px;color:var(--text-muted);line-height:1.9;">
       읽어주셔서 고마워~ ㅎ 일단 생각해보자<br>
@@ -375,6 +373,7 @@
 </section>
 
 <!-- TRAVEL -->
+<!-- FIX 1: Removed duplicate New York card. FIX 2: Norway flag changed from text "NO" to 🇳🇴 emoji. -->
 <section id="travel" class="section">
   <div class="section-header">
     <div class="section-eyebrow">✦ Where to next</div>
@@ -384,10 +383,9 @@
   <div class="glitter-divider"></div>
   <div class="travel-card"><div class="travel-flag">🇯🇵</div><div><div class="travel-name">Japan — Tokyo at Christmas</div><div class="travel-why">Roppongi Hills &amp; Midtown come alive in December with some of the most stunning Christmas illuminations in the world — think millions of lights, giant trees, and the most romantic winter night walk. Pair it with omakase sushi, luxury shopping, and Kyoto for the full experience.</div><div class="travel-tags"><span class="travel-tag">Roppongi lights ✨</span><span class="travel-tag">December</span><span class="travel-tag">Sushi heaven</span><span class="travel-tag">Luxury shopping</span></div></div><div class="travel-priority">Top pick</div></div>
   <div class="travel-card"><div class="travel-flag">🇰🇷</div><div><div class="travel-name">Jeju Island — Hydrangea Photoshoot</div><div class="travel-why">Visit in late June to early July when Jeju's blue and purple hydrangeas are at absolute peak bloom. Best spots: Camellia Hill in Seogwipo and Hallim Park — both famous for thousands of purple and blue hydrangea bushes perfect for a couple photoshoot. The flowers bloom more vivid after summer rain 💜.</div><div class="travel-tags"><span class="travel-tag">Late June – early July</span><span class="travel-tag">Purple &amp; blue blooms</span><span class="travel-tag">Photoshoot</span><span class="travel-tag">Camellia Hill</span></div></div><div class="travel-priority">Must do</div></div>
-  <div class="travel-card"><div class="travel-flag">NO</div><div><div class="travel-name">Northern Lights in Norway</div><div class="travel-why">Northern Lights cause it's breathtaking.</div><div class="travel-tags"><span class="travel-tag">Breathtaking</span><span class="travel-tag">Food</span><span class="travel-tag">Scenery</span></div></div><div class="travel-priority">Meetup spot</div></div>
-  <div class="travel-card"><div class="travel-flag">🇺🇸</div><div><div class="travel-name">New York, USA</div><div class="travel-why">Big-city energy, world-class Korean food (Koreatown!), luxury retail, top figure skating and ice hockey events.</div><div class="travel-tags"><span class="travel-tag">Korean food</span><span class="travel-tag">City energy</span><span class="travel-tag">Live sports</span></div></div><div class="travel-priority">Wishlist</div></div>  
-  <div class="travel-card"><div class="travel-flag">🇫🇷</div><div><div class="travel-name">Paris, France</div><div class="travel-why">For the luxury shopping experience of a lifetime. Champs-Élysées, the boutiques, fine dining — and maybe a very specific jewellery trip one day 💍.</div><div class="travel-tags"><span class="travel-tag">Luxury</span><span class="travel-tag">Romantic</span><span class="travel-tag">Future plans</span></div></div><div class="travel-priority">Dream trip</div></div>
+  <div class="travel-card"><div class="travel-flag">🇳🇴</div><div><div class="travel-name">Northern Lights in Norway</div><div class="travel-why">Northern Lights cause it's breathtaking.</div><div class="travel-tags"><span class="travel-tag">Breathtaking</span><span class="travel-tag">Food</span><span class="travel-tag">Scenery</span></div></div><div class="travel-priority">Wishlist</div></div>
   <div class="travel-card"><div class="travel-flag">🇺🇸</div><div><div class="travel-name">New York, USA</div><div class="travel-why">Big-city energy, world-class Korean food (Koreatown!), luxury retail, top figure skating and ice hockey events.</div><div class="travel-tags"><span class="travel-tag">Korean food</span><span class="travel-tag">City energy</span><span class="travel-tag">Live sports</span></div></div><div class="travel-priority">Wishlist</div></div>
+  <div class="travel-card"><div class="travel-flag">🇫🇷</div><div><div class="travel-name">Paris, France</div><div class="travel-why">For the luxury shopping experience of a lifetime. Champs-Élysées, the boutiques, fine dining — and maybe a very specific jewellery trip one day 💍.</div><div class="travel-tags"><span class="travel-tag">Luxury</span><span class="travel-tag">Romantic</span><span class="travel-tag">Future plans</span></div></div><div class="travel-priority">Dream trip</div></div>
 </section>
 
 <!-- MILESTONES -->
@@ -522,6 +520,7 @@
 </div>
 
 <script>
+// FIX 3: Replaced localStorage with in-memory state (works everywhere, including claude.ai)
 const bucketItems = [
   { text: "Eat omakase sushi together in Japan", sub: "The full experience, not conveyor belt", tag: "Food", done: false },
   { text: "See the Roppongi Christmas lights in Tokyo", sub: "December illuminations — millions of lights, together", tag: "Travel", done: false },
@@ -541,24 +540,6 @@ const bucketItems = [
   { text: "Plan a wedding menu together", sub: "The most fun part of wedding planning", tag: "Milestone", done: false },
 ];
 
-const STORAGE_KEY = 'dh_hyejin_bucket';
-
-function loadBucket() {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      const doneStates = JSON.parse(saved);
-      doneStates.forEach((d, i) => { if (bucketItems[i]) bucketItems[i].done = d; });
-    }
-  } catch(e) {}
-}
-
-function saveBucket() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(bucketItems.map(i => i.done)));
-  } catch(e) {}
-}
-
 function renderBucket() {
   document.getElementById('bucket-list').innerHTML = bucketItems.map((item, i) => `
     <div class="bucket-item ${item.done ? 'done' : ''}" onclick="toggleBucket(${i})">
@@ -574,7 +555,6 @@ function renderBucket() {
 
 function toggleBucket(i) {
   bucketItems[i].done = !bucketItems[i].done;
-  saveBucket();
   renderBucket();
 }
 
@@ -586,10 +566,9 @@ function show(id, btn) {
   window.scrollTo(0, 0);
 }
 
-loadBucket();
 renderBucket();
 
-// HEAVY GLITTER
+// GLITTER CANVAS
 const canvas = document.getElementById('glitter-canvas');
 const ctx = canvas.getContext('2d');
 let W, H, particles = [];
